@@ -1,0 +1,7 @@
+{
+  "name": "TecnicaDigital",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
