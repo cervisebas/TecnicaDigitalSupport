@@ -1,14 +1,14 @@
 {
-  "short_name": "Ionic App",
-  "name": "My Ionic App",
+  "short_name": "TecnicaDigital",
+  "name": "TecnicaDigital Miramar",
   "icons": [
     {
-      "src": "assets/icon/favicon.png",
+      "src": "assets/small_icon.png",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "assets/icon/icon.png",
+      "src": "assets/icon.png",
       "type": "image/png",
       "sizes": "512x512",
       "purpose": "maskable"
@@ -16,6 +16,7 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#ffffff",
-  "background_color": "#ffffff"
+  "orientation": "portrait-primary",
+  "theme_color": "#FF3232",
+  "background_color": "#00A3FF"
 }

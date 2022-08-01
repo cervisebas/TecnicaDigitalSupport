@@ -1,0 +1,23 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+* {
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+#ReactSimpleImageViewer {
+    .react-simple-image-viewer__close {
+        opacity: 1 !important;
+        top: 0 !important;
+        right: 0 !important;
+        margin: 8px;
+    }
+}

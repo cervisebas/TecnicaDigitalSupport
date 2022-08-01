@@ -1,0 +1,41 @@
+div#ScreenLoading {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url("../assets/background-loading.webp");
+    background-size: cover;
+    div.logo-tecnica {
+        background-image: url("../assets/logo.webp");
+        background-size: cover;
+        width: 180px;
+        height: 180px;
+        margin-top: -90px;
+    }
+    div.spinner {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 280px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        ion-text {
+            margin-left: 10px;
+            margin-right: 10px;
+            width: calc(100% - 20px);
+            text-align: center;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        ion-spinner {
+            width: 46px;
+            height: 46px;
+            --color: var(--ion-color-primary);
+        }
+    }
+}
