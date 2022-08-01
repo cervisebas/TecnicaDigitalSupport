@@ -1,5 +1,6 @@
 import { Redirect, Route } from 'react-router-dom';
 import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
+import Bowser from "bowser";
 import { IonReactRouter } from '@ionic/react-router';
 import Home from './pages/Home';
 
@@ -28,12 +29,14 @@ import ScreenLoading from './screens/ScreenLoading';
 import { Component, ReactNode } from 'react';
 import { Family, PWA } from './scripts/ApiFamily';
 import ShowInstallNow from './screens/ShowInstallNow';
+import NoCompatible from './screens/NoCompatible';
 
 type IProps = {};
 type IState = {
   showLoadingScreen: boolean;
   showSession: boolean;
   showInstallNow: boolean;
+  noCompatible: boolean;
 };
 
 setupIonicReact({ mode: 'ios' });
@@ -44,7 +47,8 @@ export default class App extends Component<IProps, IState> {
     this.state = {
       showLoadingScreen: true,
       showSession: false,
-      showInstallNow: false
+      showInstallNow: false,
+      noCompatible: false
     };
     this.verify = this.verify.bind(this);
     this.goAllEvent = this.goAllEvent.bind(this);
@@ -60,26 +64,30 @@ export default class App extends Component<IProps, IState> {
     document.dispatchEvent(new CustomEvent('LoadNow'));
   }
   componentDidMount() {
-    if (!PWA.checkInstall()) {
-      //return this.setState({ showInstallNow: true });
-    }
+    var broserData = Bowser.parse(navigator.userAgent);
+    var compatible = (broserData.os.name == "iOS" && broserData.platform.type == "mobile" && broserData.platform.vendor == "Apple");
+    if (!compatible) return this.setState({ noCompatible: true });
+    if (!PWA.checkInstall()) return this.setState({ showInstallNow: true });
     setTimeout(this.verify, 2000);
   }
   render() {
     return(<IonApp>
-      <IonReactRouter>
-        <IonRouterOutlet>
-          <Route exact path="/home">
-            <Home reVerify={this.verify} />
-          </Route>
-          <Route exact path="/">
-            <Redirect to="/home" />
-          </Route>
-        </IonRouterOutlet>
-      </IonReactRouter>
-      <Session visible={this.state.showSession} goReverify={this.verify} />
-      <ScreenLoading visible={this.state.showLoadingScreen} />
-      <ShowInstallNow visible={this.state.showInstallNow} />
+      {(!this.state.noCompatible)? <>
+        <IonReactRouter>
+          <IonRouterOutlet>
+            <Route exact path="/home">
+              <Home reVerify={this.verify} />
+            </Route>
+            <Route exact path="/">
+              <Redirect to="/home" />
+            </Route>
+          </IonRouterOutlet>
+        </IonReactRouter>
+        <Session visible={this.state.showSession} goReverify={this.verify} />
+        <ScreenLoading visible={this.state.showLoadingScreen} />
+        <ShowInstallNow visible={this.state.showInstallNow} />
+      </>:
+      <NoCompatible />}
     </IonApp>);
   }
 }
