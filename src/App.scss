@@ -10,7 +10,12 @@ input[type=number] {
 
 * {
     user-select: none;
+    -webkit-user-select: none;
     -webkit-user-drag: none;
+}
+input {
+    user-select: text !important;
+    -webkit-user-select: text !important;
 }
 
 #ReactSimpleImageViewer {
